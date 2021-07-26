@@ -19,7 +19,7 @@ Docker image with apache and PHP 8
 To pull from docker hub:
 
 ```
-docker pull paliari/apache-php8:1.0-dev
+docker pull paliari/apache-php8:1.0.0-dev
 ```
 
 ### Running
@@ -27,7 +27,7 @@ docker pull paliari/apache-php8:1.0-dev
 Run the container:
 
 ```
-docker container run -p 80:80 -v $(pwd):/var/www/html -d paliari/apache-php8:1.0-dev
+docker container run -p 80:80 -v $(pwd):/var/www/html -d paliari/apache-php8:1.0.0-dev
 ```
 
 Author
