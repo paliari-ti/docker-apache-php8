@@ -1,11 +1,12 @@
-FROM php:8.0-apache
+FROM php:8.1-apache
 
 LABEL maintainer="Marcos A Paliari <marcos@paliari.com.br>"
 
-RUN apt-get update \
-  && apt-get -y install libzip-dev \
-  && docker-php-ext-install opcache \
+RUN apt-get update && apt-get -y install libicu-dev libxml2-dev libzip-dev \
+  && docker-php-ext-install pdo_mysql exif opcache \
+  && docker-php-ext-install intl soap dom \
   && docker-php-ext-install zip \
+  && docker-php-ext-install sockets \
   && apt-get purge -y --auto-remove \
   && apt-get clean -y \
   && rm -rf /var/lib/apt/lists/* \
@@ -16,7 +17,6 @@ WORKDIR /var/www/html
 
 COPY apache/000-default.conf /etc/apache2/sites-available/000-default.conf
 COPY apache/charset.conf /etc/apache2/conf-available/charset.conf
-COPY php/timezone.ini /usr/local/etc/php/conf.d/timezone.ini
 COPY src/index.php /var/www/html/public/index.php
 COPY php/vars-pro.ini /usr/local/etc/php/conf.d/vars.ini
 
