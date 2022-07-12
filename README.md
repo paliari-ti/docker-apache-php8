@@ -18,7 +18,6 @@ Docker image with apache and PHP 8
 
 ### Links
 - [https://github.com/paliari-ti/docker-apache-php8](https://github.com/paliari-ti/docker-apache-php8)
-- [https://hub.docker.com/r/paliari/apache-php8](https://hub.docker.com/r/paliari/php8-oci8)
 
 ## Quick Start
 
