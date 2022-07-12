@@ -7,12 +7,14 @@ Docker image with apache and PHP 8
 ### Versioning
 | Docker Tag      | Apache Version | PHP Version | Debian Version      |
 |-----------------|----------------|-------------|---------------------|
+| 2.0.1           | 2.4.54         | 8.1.8       | Debian GNU/Linux 11 |
+| 2.0.1-gd        | 2.4.54         | 8.1.8       | Debian GNU/Linux 11 |
+| 2.0.1-dev       | 2.4.54         | 8.1.8       | Debian GNU/Linux 11 |
+| 2.0.1-dev-pcov  | 2.4.54         | 8.1.8       | Debian GNU/Linux 11 |
 | 2.0.0           | 2.4.53         | 8.1.7       | Debian GNU/Linux 11 |
 | 2.0.0-gd        | 2.4.53         | 8.1.7       | Debian GNU/Linux 11 |
 | 2.0.0-dev       | 2.4.53         | 8.1.7       | Debian GNU/Linux 11 |
 | 2.0.0-dev-pcov  | 2.4.53         | 8.1.7       | Debian GNU/Linux 11 |
-| 1.0.0-pro       | 2.4.38         | 8.0.8       | GNU/Linux 10        |
-| 1.0.0-dev       | 2.4.38         | 8.0.8       | GNU/Linux 10        |
 
 ### Links
 - [https://github.com/paliari-ti/docker-apache-php8](https://github.com/paliari-ti/docker-apache-php8)
