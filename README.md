@@ -28,7 +28,7 @@ docker pull paliari/apache-php8:2.0.0
 Run the container:
 
 ```
-docker container run -p 80:80 -v $(pwd):/var/www/html -d paliari/apache-php8:2.0.0
+docker container run -p 80:80 -v $(pwd):/var/www/html -d paliari/apache-php8:2.1.0
 ```
 
 Author
