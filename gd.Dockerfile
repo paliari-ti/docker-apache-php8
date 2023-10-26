@@ -1,4 +1,4 @@
-FROM paliari/apache-php8:2.1.0
+FROM paliari/apache-php8:2.2.0
 
 RUN apt-get update && apt-get install -y libaio-dev libjpeg-dev libpng-dev libfreetype6-dev \
   && docker-php-ext-configure gd --with-freetype --with-jpeg \
