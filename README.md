@@ -24,7 +24,7 @@ Docker image with apache and PHP 8
 To pull from docker hub:
 
 ```
-docker pull paliari/apache-php8:2.1.0
+docker pull paliari/apache-php8:<version>
 ```
 
 ### Running
