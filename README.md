@@ -35,6 +35,15 @@ Run the container:
 docker container run -p 80:80 -v $(pwd):/var/www/html -d paliari/apache-php8:2.2.0
 ```
 
+### build image
+
+```
+docker build . -t paliari/apache-php8:<version>
+docker build . -t paliari/apache-php8:<version>-gd -f gd.Dockerfile
+docker build . -t paliari/apache-php8:<version>-dev -f dev.Dockerfile
+docker build . -t paliari/apache-php8:<version>-dev-pcov -f dev-pcov.Dockerfile
+```
+
 Author
 -------
 
