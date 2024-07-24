@@ -13,6 +13,10 @@ RUN apt-get update && apt-get -y install libicu-dev libxml2-dev libzip-dev \
   && mkdir -p /var/www/html/public \
   && a2enmod headers rewrite
 
+RUN pecl install redis \
+  && rm -rf /tmp/pear \
+  && docker-php-ext-enable redis
+
 WORKDIR /var/www/html
 
 COPY apache/000-default.conf /etc/apache2/sites-available/000-default.conf
