@@ -1,4 +1,5 @@
-FROM paliari/apache-php8:2.2.1-gd
+ARG VERSION
+FROM paliari/apache-php8:${VERSION}-gd
 
 COPY php/vars-dev.ini /usr/local/etc/php/conf.d/vars.ini
 

@@ -37,11 +37,19 @@ docker container run -p 80:80 -v $(pwd):/var/www/html -d paliari/apache-php8:2.2
 
 ### build image
 
+Build all images in order (base, gd, dev, dev-pcov):
+
+```
+./build.sh <version>
+```
+
+Or build each image individually:
+
 ```
 docker build . -t paliari/apache-php8:<version>
-docker build . -t paliari/apache-php8:<version>-gd -f gd.Dockerfile
-docker build . -t paliari/apache-php8:<version>-dev -f dev.Dockerfile
-docker build . -t paliari/apache-php8:<version>-dev-pcov -f dev-pcov.Dockerfile
+docker build . -t paliari/apache-php8:<version>-gd -f gd.Dockerfile --build-arg VERSION=<version>
+docker build . -t paliari/apache-php8:<version>-dev -f dev.Dockerfile --build-arg VERSION=<version>
+docker build . -t paliari/apache-php8:<version>-dev-pcov -f dev-pcov.Dockerfile --build-arg VERSION=<version>
 ```
 
 Author

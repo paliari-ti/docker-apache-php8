@@ -1,4 +1,5 @@
-FROM paliari/apache-php8:2.2.1-dev
+ARG VERSION
+FROM paliari/apache-php8:${VERSION}-dev
 
 RUN pecl install pcov \
   && docker-php-ext-enable pcov \
