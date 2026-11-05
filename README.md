@@ -7,6 +7,10 @@ Docker image with apache and PHP 8
 ### Versioning
 | Docker Tag      | Apache Version | PHP Version | Debian Version      |
 |-----------------|----------------|-------------|---------------------|
+| 2.2.3           | 2.4.69         | 8.2.35      | Debian GNU/Linux 13 |
+| 2.2.3-gd        | 2.4.69         | 8.2.35      | Debian GNU/Linux 13 |
+| 2.2.3-dev       | 2.4.69         | 8.2.35      | Debian GNU/Linux 13 |
+| 2.2.3-dev-pcov  | 2.4.69         | 8.2.35      | Debian GNU/Linux 13 |
 | 2.2.2           | 2.4.57         | 8.2.14      | Debian GNU/Linux 12 |
 | 2.2.2-gd        | 2.4.57         | 8.2.14      | Debian GNU/Linux 12 |
 | 2.2.2-dev       | 2.4.57         | 8.2.14      | Debian GNU/Linux 12 |
