@@ -7,18 +7,10 @@ Docker image with apache and PHP 8
 ### Versioning
 | Docker Tag      | Apache Version | PHP Version | Debian Version      |
 |-----------------|----------------|-------------|---------------------|
-| 2.2.3           | 2.4.69         | 8.2.35      | Debian GNU/Linux 13 |
-| 2.2.3-gd        | 2.4.69         | 8.2.35      | Debian GNU/Linux 13 |
-| 2.2.3-dev       | 2.4.69         | 8.2.35      | Debian GNU/Linux 13 |
-| 2.2.3-dev-pcov  | 2.4.69         | 8.2.35      | Debian GNU/Linux 13 |
 | 2.2.2           | 2.4.57         | 8.2.14      | Debian GNU/Linux 12 |
 | 2.2.2-gd        | 2.4.57         | 8.2.14      | Debian GNU/Linux 12 |
 | 2.2.2-dev       | 2.4.57         | 8.2.14      | Debian GNU/Linux 12 |
 | 2.2.2-dev-pcov  | 2.4.57         | 8.2.14      | Debian GNU/Linux 12 |
-| 2.1.2           | 2.4.65         | 8.1.34      | Debian GNU/Linux 13 |
-| 2.1.2-gd        | 2.4.65         | 8.1.34      | Debian GNU/Linux 13 |
-| 2.1.2-dev       | 2.4.65         | 8.1.34      | Debian GNU/Linux 13 |
-| 2.1.2-dev-pcov  | 2.4.65         | 8.1.34      | Debian GNU/Linux 13 |
 | 2.1.1           | 2.4.54         | 8.1.8       | Debian GNU/Linux 11 |
 | 2.1.1-gd        | 2.4.54         | 8.1.8       | Debian GNU/Linux 11 |
 | 2.1.1-dev       | 2.4.54         | 8.1.8       | Debian GNU/Linux 11 |
@@ -53,13 +45,25 @@ Build all images in order (base, gd, dev, dev-pcov):
 
 The PHP version is derived from the tag (`2.1.x` uses PHP 8.1, `2.2.x` uses PHP 8.2); pass `php_version` to override it.
 
+Images are built for `linux/amd64` and `linux/arm64` by default. Multi-platform builds require the containerd image store (Docker Desktop > Settings > General > "Use containerd for pulling and storing images"). To build a single platform, set `PLATFORM`:
+
+```
+PLATFORM=linux/amd64 ./build.sh <version>
+```
+
+Check the platforms of the local images:
+
+```
+docker image ls --tree paliari/apache-php8
+```
+
 Or build each image individually:
 
 ```
-docker build . -t paliari/apache-php8:<version> --build-arg PHP_VERSION=<php_version>
-docker build . -t paliari/apache-php8:<version>-gd -f gd.Dockerfile --build-arg VERSION=<version>
-docker build . -t paliari/apache-php8:<version>-dev -f dev.Dockerfile --build-arg VERSION=<version>
-docker build . -t paliari/apache-php8:<version>-dev-pcov -f dev-pcov.Dockerfile --build-arg VERSION=<version>
+docker build . --platform linux/amd64,linux/arm64 -t paliari/apache-php8:<version> --build-arg PHP_VERSION=<php_version>
+docker build . --platform linux/amd64,linux/arm64 -t paliari/apache-php8:<version>-gd -f gd.Dockerfile --build-arg VERSION=<version>
+docker build . --platform linux/amd64,linux/arm64 -t paliari/apache-php8:<version>-dev -f dev.Dockerfile --build-arg VERSION=<version>
+docker build . --platform linux/amd64,linux/arm64 -t paliari/apache-php8:<version>-dev-pcov -f dev-pcov.Dockerfile --build-arg VERSION=<version>
 ```
 
 Author
