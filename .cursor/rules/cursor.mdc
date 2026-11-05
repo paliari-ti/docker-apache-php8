@@ -1,0 +1,47 @@
+---
+description: Convenções do projeto docker-apache-php8 (imagens Docker PHP + Apache da Paliari)
+alwaysApply: true
+---
+
+# docker-apache-php8
+
+Gera as imagens `paliari/apache-php8` usadas nos projetos PHP da empresa.
+
+## Variantes e cadeia de herança
+
+| Arquivo               | Tag               | FROM                              | Conteúdo                                   |
+|-----------------------|-------------------|-----------------------------------|--------------------------------------------|
+| `Dockerfile`          | `x.y.z`           | `php:<versão>-apache`             | Base: libs/extensões comuns, `vars-pro.ini` |
+| `gd.Dockerfile`       | `x.y.z-gd`        | `paliari/apache-php8:x.y.z`       | + GD (freetype/jpeg) e ImageMagick (PDF liberado) |
+| `dev.Dockerfile`      | `x.y.z-dev`       | `paliari/apache-php8:x.y.z-gd`    | + composer, git, vim, `php.ini-development`, `vars-dev.ini` |
+| `dev-pcov.Dockerfile` | `x.y.z-dev-pcov`  | `paliari/apache-php8:x.y.z-dev`   | + extensão pcov (cobertura de testes)       |
+
+- Lib necessária em produção vai no `Dockerfile` base (ou no `gd.Dockerfile` se for de imagem).
+- Ferramentas só de desenvolvimento vão em `dev.Dockerfile`; nunca na base.
+
+## Ao lançar nova versão
+
+1. Atualizar o `FROM` dos Dockerfiles derivados para a nova tag `x.y.z` (todos com a mesma versão).
+2. Atualizar a tabela de versionamento do `README.md` (Apache, PHP, Debian) com as 4 tags.
+3. Build/push **na ordem**: base → gd → dev → dev-pcov:
+   ```
+   docker build . -t paliari/apache-php8:x.y.z
+   docker build . -t paliari/apache-php8:x.y.z-gd -f gd.Dockerfile
+   docker build . -t paliari/apache-php8:x.y.z-dev -f dev.Dockerfile
+   docker build . -t paliari/apache-php8:x.y.z-dev-pcov -f dev-pcov.Dockerfile
+   ```
+4. Criar a git tag `x.y.z`.
+
+Versionamento: major/minor acompanham a versão do PHP (2.1 = PHP 8.1, 2.2 = PHP 8.2); patch para mudanças de libs/config.
+
+## Padrões dos Dockerfiles
+
+- Agrupar `apt-get update && apt-get install` em um único `RUN` e sempre terminar com:
+  `apt-get purge -y --auto-remove && apt-get clean -y && rm -rf /var/lib/apt/lists/*`
+- Extensões nativas: `docker-php-ext-install`; PECL: `pecl install` + `docker-php-ext-enable` + limpar cache (`rm -rf /tmp/pear` ou `pecl clear-cache`).
+- Configs PHP customizadas ficam em `php/vars-pro.ini` e `php/vars-dev.ini`; manter as duas em sincronia (só divergir onde for intencional, ex.: `memory_limit`).
+- Configs Apache ficam em `apache/`; DocumentRoot é `/var/www/html/public`.
+
+## Commits
+
+Conventional commits (`feat`, `fix`, `chore`, `docs`, `refactor`), ex.: `feat: add redis extension`.
