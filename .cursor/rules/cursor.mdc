@@ -11,19 +11,19 @@ Gera as imagens `paliari/apache-php8` usadas nos projetos PHP da empresa.
 
 | Arquivo               | Tag               | FROM                                    | Conteúdo                                   |
 |-----------------------|-------------------|-----------------------------------------|--------------------------------------------|
-| `Dockerfile`          | `x.y.z`           | `php:<versão>-apache`                   | Base: libs/extensões comuns, `vars-pro.ini` |
+| `Dockerfile`          | `x.y.z`           | `php:${PHP_VERSION}-apache`             | Base: libs/extensões comuns, `vars-pro.ini` |
 | `gd.Dockerfile`       | `x.y.z-gd`        | `paliari/apache-php8:${VERSION}`        | + GD (freetype/jpeg) e ImageMagick (PDF liberado) |
 | `dev.Dockerfile`      | `x.y.z-dev`       | `paliari/apache-php8:${VERSION}-gd`     | + composer, git, vim, `php.ini-development`, `vars-dev.ini` |
 | `dev-pcov.Dockerfile` | `x.y.z-dev-pcov`  | `paliari/apache-php8:${VERSION}-dev`    | + extensão pcov (cobertura de testes)       |
 
 - Lib necessária em produção vai no `Dockerfile` base (ou no `gd.Dockerfile` se for de imagem).
 - Ferramentas só de desenvolvimento vão em `dev.Dockerfile`; nunca na base.
-- Os Dockerfiles derivados usam `ARG VERSION` sem valor padrão; nunca fixar a tag no `FROM`.
+- O `Dockerfile` base usa `ARG PHP_VERSION` e os derivados `ARG VERSION`, ambos sem valor padrão; nunca fixar versão/tag no `FROM`.
 
 ## Ao lançar nova versão
 
 1. Atualizar a tabela de versionamento do `README.md` (Apache, PHP, Debian) com as 4 tags.
-2. Rodar `./build.sh x.y.z`: builda na ordem base → gd → dev → dev-pcov, passando `--build-arg VERSION=x.y.z` aos derivados.
+2. Rodar `./build.sh x.y.z`: builda na ordem base → gd → dev → dev-pcov. O PHP sai da tag (`2.1.x` → 8.1, `2.2.x` → 8.2) e vai como `--build-arg PHP_VERSION` para a base; os derivados recebem `--build-arg VERSION=x.y.z`. Para sobrescrever o PHP: `./build.sh x.y.z 8.N`.
 3. Fazer push das 4 tags no Docker Hub (manual).
 4. Criar a git tag `x.y.z`.
 

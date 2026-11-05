@@ -44,13 +44,15 @@ docker container run -p 80:80 -v $(pwd):/var/www/html -d paliari/apache-php8:2.2
 Build all images in order (base, gd, dev, dev-pcov):
 
 ```
-./build.sh <version>
+./build.sh <version> [php_version]
 ```
+
+The PHP version is derived from the tag (`2.1.x` uses PHP 8.1, `2.2.x` uses PHP 8.2); pass `php_version` to override it.
 
 Or build each image individually:
 
 ```
-docker build . -t paliari/apache-php8:<version>
+docker build . -t paliari/apache-php8:<version> --build-arg PHP_VERSION=<php_version>
 docker build . -t paliari/apache-php8:<version>-gd -f gd.Dockerfile --build-arg VERSION=<version>
 docker build . -t paliari/apache-php8:<version>-dev -f dev.Dockerfile --build-arg VERSION=<version>
 docker build . -t paliari/apache-php8:<version>-dev-pcov -f dev-pcov.Dockerfile --build-arg VERSION=<version>

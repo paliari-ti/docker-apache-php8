@@ -1,4 +1,5 @@
-FROM php:8.2-apache
+ARG PHP_VERSION
+FROM php:${PHP_VERSION}-apache
 
 LABEL maintainer="Marcos A Paliari <marcos@paliari.com.br>"
 
