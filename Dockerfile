@@ -4,7 +4,8 @@ FROM php:${PHP_VERSION}-apache
 LABEL maintainer="Marcos A Paliari <marcos@paliari.com.br>"
 
 RUN apt-get update && apt-get -y install libicu-dev libxml2-dev libzip-dev \
-  && docker-php-ext-install pdo_mysql exif opcache \
+  && docker-php-ext-install pdo_mysql exif \
+  && { php -m | grep -q 'Zend OPcache' || docker-php-ext-install opcache; } \
   && docker-php-ext-install intl soap dom \
   && docker-php-ext-install zip \
   && docker-php-ext-install sockets \
