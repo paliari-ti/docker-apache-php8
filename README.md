@@ -7,6 +7,10 @@ Docker image with apache and PHP 8
 ### Versioning
 | Docker Tag      | Apache Version | PHP Version | Debian Version      |
 |-----------------|----------------|-------------|---------------------|
+| 2.5.0           | 2.4.69         | 8.5.12      | Debian GNU/Linux 13 |
+| 2.5.0-gd        | 2.4.69         | 8.5.12      | Debian GNU/Linux 13 |
+| 2.5.0-dev       | 2.4.69         | 8.5.12      | Debian GNU/Linux 13 |
+| 2.5.0-dev-pcov  | 2.4.69         | 8.5.12      | Debian GNU/Linux 13 |
 | 2.4.0           | 2.4.69         | 8.4.27      | Debian GNU/Linux 13 |
 | 2.4.0-gd        | 2.4.69         | 8.4.27      | Debian GNU/Linux 13 |
 | 2.4.0-dev       | 2.4.69         | 8.4.27      | Debian GNU/Linux 13 |
@@ -59,7 +63,7 @@ Build all images in order (base, gd, dev, dev-pcov):
 ./build.sh <version> [php_version]
 ```
 
-The PHP version is derived from the tag (`2.1.x` uses PHP 8.1, `2.2.x` uses PHP 8.2, `2.3.x` uses PHP 8.3, `2.4.x` uses PHP 8.4); pass `php_version` to override it.
+The PHP version is derived from the tag (`2.1.x` uses PHP 8.1, `2.2.x` uses PHP 8.2, `2.3.x` uses PHP 8.3, `2.4.x` uses PHP 8.4, `2.5.x` uses PHP 8.5); pass `php_version` to override it.
 
 Images are built for `linux/amd64` and `linux/arm64` by default. Multi-platform builds require the containerd image store (Docker Desktop > Settings > General > "Use containerd for pulling and storing images"). To build a single platform, set `PLATFORM`:
 
