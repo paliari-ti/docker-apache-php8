@@ -23,11 +23,11 @@ Gera as imagens `paliari/apache-php8` usadas nos projetos PHP da empresa.
 ## Ao lançar nova versão
 
 1. Atualizar a tabela de versionamento do `README.md` (Apache, PHP, Debian) com as 4 tags.
-2. Rodar `./build.sh x.y.z`: builda na ordem base → gd → dev → dev-pcov. O PHP sai da tag (`2.1.x` → 8.1, `2.2.x` → 8.2, `2.3.x` → 8.3) e vai como `--build-arg PHP_VERSION` para a base; os derivados recebem `--build-arg VERSION=x.y.z`. Para sobrescrever o PHP: `./build.sh x.y.z 8.N`. O build é multi-arch (`linux/amd64,linux/arm64`) por padrão e exige o containerd image store do Docker Desktop; para uma única plataforma: `PLATFORM=linux/arm64 ./build.sh x.y.z`.
+2. Rodar `./build.sh x.y.z`: builda na ordem base → gd → dev → dev-pcov. O PHP sai da tag (`2.1.x` → 8.1, `2.2.x` → 8.2, `2.3.x` → 8.3, `2.4.x` → 8.4) e vai como `--build-arg PHP_VERSION` para a base; os derivados recebem `--build-arg VERSION=x.y.z`. Para sobrescrever o PHP: `./build.sh x.y.z 8.N`. O build é multi-arch (`linux/amd64,linux/arm64`) por padrão e exige o containerd image store do Docker Desktop; para uma única plataforma: `PLATFORM=linux/arm64 ./build.sh x.y.z`.
 3. Fazer push das 4 tags no Docker Hub (manual).
 4. Criar a git tag `x.y.z`.
 
-Versionamento: major/minor acompanham a versão do PHP (2.1 = PHP 8.1, 2.2 = PHP 8.2, 2.3 = PHP 8.3); patch para mudanças de libs/config.
+Versionamento: major/minor acompanham a versão do PHP (2.1 = PHP 8.1, 2.2 = PHP 8.2, 2.3 = PHP 8.3, 2.4 = PHP 8.4); patch para mudanças de libs/config.
 
 ## Padrões dos Dockerfiles
 
