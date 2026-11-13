@@ -24,7 +24,9 @@ WORKDIR /var/www/html
 
 COPY apache/000-default.conf /etc/apache2/sites-available/000-default.conf
 COPY apache/charset.conf /etc/apache2/conf-available/charset.conf
+COPY apache/servername.conf /etc/apache2/conf-available/servername.conf
 COPY src/index.php /var/www/html/public/index.php
 COPY php/vars-pro.ini /usr/local/etc/php/conf.d/vars.ini
 
-RUN cp -f "/usr/local/etc/php/php.ini-production" /usr/local/etc/php/php.ini
+RUN a2enconf servername \
+  && cp -f "/usr/local/etc/php/php.ini-production" /usr/local/etc/php/php.ini
